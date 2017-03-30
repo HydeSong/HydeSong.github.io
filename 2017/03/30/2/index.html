@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://hydesong.github.io/2017/03/30/2/index.html">
 <meta property="og:site_name" content="Hyde Song">
 <meta property="og:description" content="早在2007年我刚加入Mozilla的JavaScript团队的时候广为流传一个笑话：通常来说JavaScript程序的长度只有一行。那时候Google Maps的诞龄还只有两岁，在它诞生之前，JavaScript主要被用来验证表单，毫无疑问，每一个处理&amp;lt;input onchange=&amp;gt;的程序真的就只有一行代码。今非昔比，JavaScript项目的规模已经成长到令人惊叹的地步，社区也">
-<meta property="og:updated_time" content="2017-03-30T09:27:39.000Z">
+<meta property="og:updated_time" content="2017-03-30T10:30:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js模块 Modules">
 <meta name="twitter:description" content="早在2007年我刚加入Mozilla的JavaScript团队的时候广为流传一个笑话：通常来说JavaScript程序的长度只有一行。那时候Google Maps的诞龄还只有两岁，在它诞生之前，JavaScript主要被用来验证表单，毫无疑问，每一个处理&amp;lt;input onchange=&amp;gt;的程序真的就只有一行代码。今非昔比，JavaScript项目的规模已经成长到令人惊叹的地步，社区也">
@@ -194,7 +194,7 @@
 
         
         <a href="/2017/03/30/2/" class="archive-article-date">
-  	<time datetime="2017-03-30T09:27:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-30</time>
+  	<time datetime="2017-03-30T10:30:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-30</time>
 </a>
         
       </header>
@@ -211,7 +211,7 @@
 <li>在模块中你可以使用import和export关键字。</li>
 </ol>
 </blockquote>
-<a id="more"></a>
+<!-- ... -->
 <p>我们先来讨论export。默认情况下，你在模块中的所有声明相对于模块而言都是寄存在本地的。如果你希望公开在模块中声明的内容，并让其它模块加以使用，你一定要导出这些功能。想要导出模块的功能有很多方法，其中最简单的方式是添加export关键字。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// kittydar.js - 找到一幅图像中所有猫的位置</span></div><div class="line"><span class="comment">// （事实上是Heather Arthur写的这个库）</span></div><div class="line"><span class="comment">// （但是她没有使用ES6中新的模块特性，因为那时候是2013年）</span></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">detectCats</span>(<span class="params">canvas, options</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> kittydar = <span class="keyword">new</span> Kittydar(options);</div><div class="line">  <span class="keyword">return</span> kittydar.detectCats(canvas);</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Kittydar</span> </span>&#123;</div><div class="line">  ... 处理图片的几种方法 ...</div><div class="line">&#125;</div><div class="line"><span class="comment">// 这个helper函数没有被export。</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">resizeCanvas</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  ...</div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
 <p>你可以导出所有的最外层函数、类以及var、let或const声明的变量。</p>
