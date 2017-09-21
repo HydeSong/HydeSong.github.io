@@ -17,7 +17,7 @@
 <meta property="og:description" content="JS 中的函数调用看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。
 例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inne">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/9/19/54a85be…?imageView2/1/w/1200/h/700/q/85/interlace/1">
-<meta property="og:updated_time" content="2017-09-21T14:59:42.000Z">
+<meta property="og:updated_time" content="2017-09-21T15:01:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this、apply、call、bind（补充）">
 <meta name="twitter:description" content="JS 中的函数调用看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。
@@ -218,6 +218,7 @@
 <li>使用构造函数调用函数</li>
 <li>作为函数方法调用函数（call、apply）</li>
 </ol>
+<a id="more"></a>
 <h3 id="作为一个函数调用"><a href="#作为一个函数调用" class="headerlink" title="作为一个函数调用"></a>作为一个函数调用</h3><p>比如上面的 例 1：</p>
 <p>例 1：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> name = <span class="string">"Cherry"</span>;</div><div class="line"></div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);          <span class="comment">// windowsName</span></div><div class="line"></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"inner:"</span> + <span class="keyword">this</span>);    <span class="comment">// inner: Window</span></div><div class="line">    &#125;</div><div class="line">    a();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"outer:"</span> + <span class="keyword">this</span>)         <span class="comment">// outer: Window</span></div></pre></td></tr></table></figure>
@@ -466,10 +467,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">原生js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
               </li>
              
@@ -478,7 +475,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">技术书籍</a>
+                <a href="javascript:void(0)" class="js-tag color5">原生js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,11 +487,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">心率</a>
+                <a href="javascript:void(0)" class="js-tag color5">技术书籍</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">babel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">心率</a>
               </li>
              
               <li class="article-tag-list-item">
