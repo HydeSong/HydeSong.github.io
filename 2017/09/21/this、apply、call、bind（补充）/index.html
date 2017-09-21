@@ -9,18 +9,20 @@
   <title>this、apply、call、bind（补充） | Hyde Song</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="JS 中的函数调用看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。
-例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inner">
+例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inne">
 <meta property="og:type" content="article">
 <meta property="og:title" content="this、apply、call、bind（补充）">
 <meta property="og:url" content="http://hydesong.github.io/2017/09/21/this、apply、call、bind（补充）/index.html">
 <meta property="og:site_name" content="Hyde Song">
 <meta property="og:description" content="JS 中的函数调用看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。
-例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inner">
-<meta property="og:updated_time" content="2017-09-21T14:57:38.000Z">
+例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inne">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/9/19/54a85be…?imageView2/1/w/1200/h/700/q/85/interlace/1">
+<meta property="og:updated_time" content="2017-09-21T14:59:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this、apply、call、bind（补充）">
 <meta name="twitter:description" content="JS 中的函数调用看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。
-例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inner">
+例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inne">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/9/19/54a85be…?imageView2/1/w/1200/h/700/q/85/interlace/1">
   
     <link rel="alternative" href="/atom.xml" title="Hyde Song" type="application/atom+xml">
   
@@ -204,7 +206,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="JS-中的函数调用"><a href="#JS-中的函数调用" class="headerlink" title="JS 中的函数调用"></a>JS 中的函数调用</h2><p>看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。</p>
+        <p><img src="https://user-gold-cdn.xitu.io/2017/9/19/54a85be…?imageView2/1/w/1200/h/700/q/85/interlace/1" alt="baner"></p>
+<h2 id="JS-中的函数调用"><a href="#JS-中的函数调用" class="headerlink" title="JS 中的函数调用"></a>JS 中的函数调用</h2><p>看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。</p>
 <p>例 6：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> name = <span class="string">'Cherry'</span>;</div><div class="line">        innerFunction();</div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">innerFunction</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// windowsName</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    fn()</div></pre></td></tr></table></figure></p>
 <p>例 7：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> a = &#123;</div><div class="line">        <span class="attr">name</span> : <span class="string">"Cherry"</span>,</div><div class="line"></div><div class="line">        <span class="attr">func1</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)     </div><div class="line">        &#125;,</div><div class="line"></div><div class="line">        <span class="attr">func2</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            setTimeout(  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">this</span>.func1()</div><div class="line">            &#125;,<span class="number">100</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    a.func2()     <span class="comment">// this.func1 is not a function</span></div></pre></td></tr></table></figure>
@@ -459,7 +462,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">原生js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -467,11 +474,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">原生js</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -483,19 +486,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">心率</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CSS预处理器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+                <a href="javascript:void(0)" class="js-tag color3">心率</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">babel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
             
             <div class="clearfix"></div>
