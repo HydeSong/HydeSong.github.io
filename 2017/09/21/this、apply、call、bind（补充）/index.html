@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hydesong.github.io">
-  <title>Archives: 2017/9 | Hyde Song</title>
+  <title>this、apply、call、bind（补充） | Hyde Song</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端,js,jquery,javascript,html5,MVVM,Vue,React,Angular,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hyde Song">
-<meta property="og:url" content="http://hydesong.github.io/archives/2017/09/index.html">
+  <meta name="description" content="JS 中的函数调用看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。
+例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inner">
+<meta property="og:type" content="article">
+<meta property="og:title" content="this、apply、call、bind（补充）">
+<meta property="og:url" content="http://hydesong.github.io/2017/09/21/this、apply、call、bind（补充）/index.html">
 <meta property="og:site_name" content="Hyde Song">
-<meta property="og:description" content="前端,js,jquery,javascript,html5,MVVM,Vue,React,Angular,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="og:description" content="JS 中的函数调用看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。
+例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inner">
+<meta property="og:updated_time" content="2017-09-21T14:57:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hyde Song">
-<meta name="twitter:description" content="前端,js,jquery,javascript,html5,MVVM,Vue,React,Angular,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta name="twitter:title" content="this、apply、call、bind（补充）">
+<meta name="twitter:description" content="JS 中的函数调用看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。
+例 6：1234567891011var name = &quot;windowsName&quot;;    function fn() &amp;#123;        var name = &apos;Cherry&apos;;        inner">
   
     <link rel="alternative" href="/atom.xml" title="Hyde Song" type="application/atom+xml">
   
@@ -180,36 +184,100 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-this、apply、call、bind（补充）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      this、apply、call、bind（补充）
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/21/this、apply、call、bind（补充）/" class="archive-article-date">
+
+        
+        <a href="/2017/09/21/this、apply、call、bind（补充）/" class="archive-article-date">
   	<time datetime="2017-09-21T14:50:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/21/this、apply、call、bind（补充）/">this、apply、call、bind（补充）</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="JS-中的函数调用"><a href="#JS-中的函数调用" class="headerlink" title="JS 中的函数调用"></a>JS 中的函数调用</h2><p>看到留言说，很多童靴不理解为什么 例 6 的 innerFunction 和 例 7 的 this 是指向 window 的，所以我就来补充一下 JS 中的函数调用。</p>
+<p>例 6：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> name = <span class="string">'Cherry'</span>;</div><div class="line">        innerFunction();</div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">innerFunction</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// windowsName</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    fn()</div></pre></td></tr></table></figure></p>
+<p>例 7：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> a = &#123;</div><div class="line">        <span class="attr">name</span> : <span class="string">"Cherry"</span>,</div><div class="line"></div><div class="line">        <span class="attr">func1</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)     </div><div class="line">        &#125;,</div><div class="line"></div><div class="line">        <span class="attr">func2</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            setTimeout(  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">this</span>.func1()</div><div class="line">            &#125;,<span class="number">100</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    a.func2()     <span class="comment">// this.func1 is not a function</span></div></pre></td></tr></table></figure>
+<p>函数调用的方法一共有 4 种</p>
+<ol>
+<li>作为一个函数调用</li>
+<li>函数作为方法调用</li>
+<li>使用构造函数调用函数</li>
+<li>作为函数方法调用函数（call、apply）</li>
+</ol>
+<h3 id="作为一个函数调用"><a href="#作为一个函数调用" class="headerlink" title="作为一个函数调用"></a>作为一个函数调用</h3><p>比如上面的 例 1：</p>
+<p>例 1：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> name = <span class="string">"Cherry"</span>;</div><div class="line"></div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);          <span class="comment">// windowsName</span></div><div class="line"></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"inner:"</span> + <span class="keyword">this</span>);    <span class="comment">// inner: Window</span></div><div class="line">    &#125;</div><div class="line">    a();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"outer:"</span> + <span class="keyword">this</span>)         <span class="comment">// outer: Window</span></div></pre></td></tr></table></figure>
+<p>这样一个最简单的函数，不属于任何一个对象，就是一个函数，这样的情况在 JavaScript 的在浏览器中的非严格模式默认是属于全局对象 window 的，在严格模式，就是 undefined。</p>
+<p>所以说更多的情况是将函数作为对象的方法使用。比如例 2：</p>
+<p>例 2：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line">    <span class="keyword">var</span> a = &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">"Cherry"</span>,</div><div class="line">        <span class="attr">fn</span> : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// Cherry</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    a.fn();</div></pre></td></tr></table></figure></p>
+<p>这里定义一个对象 a，对象 a 有一个属性（name）和一个方法（fn）。</p>
+<p>然后对象 a 通过 . 方法调用了其中的 fn 方法。</p>
+<p>然后我们一直记住的那句话“this 永远指向最后调用它的那个对象”，所以在 fn 中的 this 就是指向 a 的。</p>
+<h3 id="使用构造函数调用函数"><a href="#使用构造函数调用函数" class="headerlink" title="使用构造函数调用函数"></a>使用构造函数调用函数</h3><blockquote>
+<p>如果函数调用前使用了 new 关键字, 则是调用了构造函数。<br>这看起来就像创建了新的函数，但实际上 JavaScript 函数是重新创建的对象：</p>
+</blockquote>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 构造函数:</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span><span class="params">(arg1, arg2)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.firstName = arg1;</div><div class="line">    <span class="keyword">this</span>.lastName  = arg2;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// This    creates a new object</span></div><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> myFunction(<span class="string">"Li"</span>,<span class="string">"Cherry"</span>);</div><div class="line">a.lastName;                             <span class="comment">// 返回 "Cherry"</span></div></pre></td></tr></table></figure>
+<p>这就有要说另一个面试经典问题：new 的过程了，(ಥ_ಥ)</p>
+<p>这里就简单的来看一下 new 的过程吧：</p>
+<p>伪代码表示：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="type">myFunction</span>(<span class="string">"Li"</span>,<span class="string">"Cherry"</span>);</div><div class="line"></div><div class="line"><span class="keyword">new</span> <span class="type">myFunction</span>&#123;</div><div class="line">    <span class="keyword">var</span> obj = &#123;&#125;;</div><div class="line">    obj.__proto__ = myFunction.prototype;</div><div class="line">    <span class="keyword">var</span> result = myFunction.call(obj,<span class="string">"Li"</span>,<span class="string">"Cherry"</span>);</div><div class="line">    <span class="keyword">return</span> typeof result === <span class="string">'obj'</span>? result : <span class="type">obj</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>创建一个空对象 obj;</li>
+<li>将新创建的空对象的隐式原型指向其构造函数的显示原型。</li>
+<li>使用 call 改变 this 的指向</li>
+<li>如果无返回值或者返回一个非对象值，则将 obj 返回作为新对象；如果返回值是一个新对象的话那么直接直接返回该对象。</li>
+</ol>
+<p>所以我们可以看到，在 new 的过程中，我们是使用 call 改变了 this 的指向。</p>
+<h3 id="作为函数方法调用函数"><a href="#作为函数方法调用函数" class="headerlink" title="作为函数方法调用函数"></a>作为函数方法调用函数</h3><blockquote>
+<p>在 JavaScript 中, 函数是对象。<br>JavaScript 函数有它的属性和方法。<br>call() 和 apply() 是预定义的函数方法。 两个方法可用于调用函数，两个方法的第一个参数必须是对象本身<br>在 JavaScript 严格模式(strict mode)下, 在调用函数时第一个参数会成为 this 的值， 即使该参数不是一个对象。<br>在 JavaScript 非严格模式(non-strict mode)下, 如果第一个参数的值是 null 或 undefined, 它将使用全局对象替代。</p>
+</blockquote>
+<p>这个时候我们再来看例 6：</p>
+<p>例 6：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> name = <span class="string">'Cherry'</span>;</div><div class="line">        innerFunction();</div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">innerFunction</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// windowsName</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    fn()</div></pre></td></tr></table></figure>
+<p>这里的 innerFunction() 的调用是不是属于第一种调用方式：作为一个函数调用（它就是作为一个函数调用的，没有挂载在任何对象上，所以对于没有挂载在任何对象上的函数，在非严格模式下 this 就是指向 window 的）</p>
+<p>然后再看一下 例 7：</p>
+<p>例 7：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> a = &#123;</div><div class="line">        <span class="attr">name</span> : <span class="string">"Cherry"</span>,</div><div class="line"></div><div class="line">        <span class="attr">func1</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)     </div><div class="line">        &#125;,</div><div class="line"></div><div class="line">        <span class="attr">func2</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            setTimeout(  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">this</span>.func1()</div><div class="line">            &#125;,<span class="number">100</span> );</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    a.func2()     <span class="comment">// this.func1 is not a function</span></div></pre></td></tr></table></figure></p>
+<p>这个简单一点的理解可以理解为“匿名函数的 this 永远指向 window”，你可以这样想，还是那句话this 永远指向最后调用它的那个对象，那么我们就来找最后调用匿名函数的对象，这就很尴尬了，因为匿名函数名字啊，笑哭，所以我们是没有办法被其他对象调用匿名函数的。所以说 匿名函数的 this 永远指向 window。</p>
+<p>如果这个时候你要问，那匿名函数都是怎么定义的，首先，我们通常写的匿名函数都是自执行的，就是在匿名函数后面加 () 让其自执行。其次就是虽然匿名函数不能被其他对象调用，但是可以被其他函数调用啊，比如例 7 中的 setTimeout。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>请我喝杯咖啡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -221,95 +289,88 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://hydesong.github.io/2017/09/21/this、apply、call、bind（补充）/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/21/为什么-call-比-apply-快？/" class="archive-article-date">
-  	<time datetime="2017-09-21T14:05:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/21/为什么-call-比-apply-快？/">为什么 call 比 apply 快？</a>
-    </h1>
+  
+    <a href="/2017/09/21/为什么-call-比-apply-快？/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">为什么 call 比 apply 快？</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">原生js</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/21/10/" class="archive-article-date">
-  	<time datetime="2017-09-21T13:47:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/21/10/">this、apply、call、bind</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">原生js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -332,8 +393,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
