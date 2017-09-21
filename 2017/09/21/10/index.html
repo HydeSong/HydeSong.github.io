@@ -22,7 +22,7 @@ this 的指向在 ES5 中，其实 this 的指向，始终坚持一个原理：t
 本文首发于：cherryblog.site/
 
 this 的指向在 ES5 中，其实 this 的指向，始终坚持一个原理：this 永远指向最后调用它的那个对象，来">
-<meta property="og:updated_time" content="2017-09-21T14:46:32.000Z">
+<meta property="og:updated_time" content="2017-09-21T14:48:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this、apply、call、bind">
 <meta name="twitter:description" content="这又是一个面试经典问题~/(ㄒoㄒ)/~~也是 ES5中众多坑中的一个，在 ES6 中可能会极大避免 this 产生的错误，但是为了一些老代码的维护，最好还是了解一下 this 的指向和 call、apply、bind 三者的区别。
@@ -217,7 +217,9 @@ this 的指向在 ES5 中，其实 this 的指向，始终坚持一个原理：t
 <blockquote>
 <p>本文首发于：<a href="cherryblog.site/">cherryblog.site/</a></p>
 </blockquote>
-<h2 id="this-的指向"><a href="#this-的指向" class="headerlink" title="this 的指向"></a>this 的指向</h2><p>在 ES5 中，其实 this 的指向，始终坚持一个原理：this 永远指向最后调用它的那个对象，来，跟着我朗读三遍：this 永远指向最后调用它的那个对象，this 永远指向最后调用它的那个对象，this 永远指向最后调用它的那个对象。记住这句话，this 你已经了解一半了。<br><a id="more"></a><br>下面我们来看一个最简单的例子：</p>
+<h2 id="this-的指向"><a href="#this-的指向" class="headerlink" title="this 的指向"></a>this 的指向</h2><p>在 ES5 中，其实 this 的指向，始终坚持一个原理：this 永远指向最后调用它的那个对象，来，跟着我朗读三遍：this 永远指向最后调用它的那个对象，this 永远指向最后调用它的那个对象，this 永远指向最后调用它的那个对象。记住这句话，this 你已经了解一半了。</p>
+<a id="more"></a>
+<p>下面我们来看一个最简单的例子：</p>
 <p>例 1：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> name = <span class="string">"Cherry"</span>;</div><div class="line"></div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);          <span class="comment">// windowsName</span></div><div class="line"></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"inner:"</span> + <span class="keyword">this</span>);    <span class="comment">// inner: Window</span></div><div class="line">    &#125;</div><div class="line">    a();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"outer:"</span> + <span class="keyword">this</span>)         <span class="comment">// outer: Window</span></div></pre></td></tr></table></figure></p>
 <p>这个相信大家都知道为什么 log 的是 windowsName，因为根据刚刚的那句话“this 永远指向最后调用它的那个对象”，我们看最后调用 a 的地方 a();，前面没有调用的对象那么就是全局对象 window，这就相当于是 window.a()；注意，这里我们没有使用严格模式，如果使用严格模式的话，全局对象就是 undefined，那么就会报错 Uncaught TypeError: Cannot read property ‘name’ of undefined。</p>
 <p>再看下这个例子：<br>例 2：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</div><div class="line">    <span class="keyword">var</span> a = &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">"Cherry"</span>,</div><div class="line">        <span class="attr">fn</span> : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// Cherry</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    a.fn();</div></pre></td></tr></table></figure></p>
@@ -506,15 +508,15 @@ this 的指向在 ES5 中，其实 this 的指向，始终坚持一个原理：t
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">原生js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">模块化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -534,11 +536,11 @@ this 的指向在 ES5 中，其实 this 的指向，始终坚持一个原理：t
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">babel</a>
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+                <a href="javascript:void(0)" class="js-tag color1">babel</a>
               </li>
             
             <div class="clearfix"></div>
